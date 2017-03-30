@@ -1,4 +1,4 @@
-package main
+package gif_module
 
 import (
 	"image/color"
@@ -7,17 +7,12 @@ import (
 	"image/gif"
 	"image"
 	"math"
-	"os"
 )
 
 var palette = []color.Color{color.White, color.Black}
 
 const whiteIndex  = 0
 const blackIndex  = 1
-
-func main()  {
-	Lissajous(os.Stdout)
-}
 
 // export
 func Lissajous(out io.Writer)  {
