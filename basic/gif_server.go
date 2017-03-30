@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"log"
-	"./gif_module"
+	. "./gif_module"
 
 )
 
@@ -13,5 +13,5 @@ func main()  {
 }
 
 func handleGif(w http.ResponseWriter, r *http.Request)  {
-	gif_module.Lissajous(w)
+	Lissajous(w)
 }
