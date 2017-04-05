@@ -3,31 +3,24 @@ package main
 import "fmt"
 
 func isValid(s string) bool {
-	var p1, p2, p3 int
-	for _, c := range s {
-		if c == '(' {
-			p1 += 1
+	var pop rune
+	var t []rune
+	for _, r := range s {
+		if len(t) == 0 {
+			t = append(t, r)
+			continue
 		}
-		if c == ')' {
-			p1 -= 1
-		}
-		if c == '{' {
-			p2 += 1
-		}
-		if c == '}' {
-			p2 -= 1
-		}
-		if c == '[' {
-			p3 += 1
-		}
-		if c == ']' {
-			p3 -= 1
+		pop = t[len(t)-1]
+		if (r == '}' && pop =='{') || (r == ')' && pop =='(') || (r == ']' && pop =='['){
+			t = t[:len(t)-1]
+		} else {
+			t = append(t, r)
 		}
 	}
-	return p1 == 0 && p2 ==0 && p3==0
+	return len(t) == 0
 }
 
-func main()  {
+func main() {
 	fmt.Println(isValid("{}"))
 	fmt.Println(isValid("{[]}"))
 	fmt.Println(isValid("{[)]}"))
