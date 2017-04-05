@@ -10,7 +10,7 @@ func countAndSay(n int) string {
 	if n == 1 {
 		return s
 	}
-	for i:=0;i<n;i++{
+	for i:=1;i<n;i++{
 		s = count(s)
 	}
 	return s
