@@ -41,44 +41,23 @@ func build(vals []int) *ListNode {
  * }
  */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		return nil
-	}
-	if l1!=nil {
-		if l2 == nil {
-			return l1
-		}
-	} else {
+	if l1 == nil {
 		return l2
 	}
-	head:=l1
+	if l2==nil {
+		return l1
+	}
+	var head *ListNode
 	if l1.Val>l2.Val {
-		head=l2
-	}
-	var p *ListNode
-	v1, v2:=l1.Val, l2.Val
-	for l1!=nil && l2!=nil {
-		if l1.Val>v2 {
-			if l1 < v2 {
-				
-			}	
-		} else {
-		}
-	}
-	if l1!=nil {
-		l2.Next = l1
-	}
-	if l2!=nil {
-		l1.Next = l2
-	}
-	if l1f {
-		return h1
+		// 3, 4 ,5   1 2 3
+		head = l2
+		head.Next = mergeTwoLists(l1, l2.Next)
 	} else {
-		return h2
+		head = l1
+		head.Next = mergeTwoLists(l1.Next, l2)
 	}
+	return head
 }
-
-
 
 func main()  {
 	l1 := build([]int{1,2,3,9})
@@ -88,9 +67,3 @@ func main()  {
 	print(l2)
 	print(r)
 }
-
-1 2 3 9
-
-5 6 4 9 9
-
-1
