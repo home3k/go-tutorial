@@ -13,7 +13,7 @@ M = 1000
  */
 
 var it = []int {1000,900,500,400,100,90,50,40,10,9,5,4,1}
-var roman = []string{"M","DM","D","CD","C","LC","L","XL","X","IV","V","IV","I"}
+var roman = []string{"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"}
 func intToRoman(num int) string {
 	result:=""
 	for i,item:=range it {
@@ -29,5 +29,5 @@ func main()  {
 	fmt.Println(intToRoman(3999))
 	fmt.Println(intToRoman(1))
 	fmt.Println(intToRoman(1000))
-	fmt.Println(intToRoman(999))
+	fmt.Println(intToRoman(9))
 }
