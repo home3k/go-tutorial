@@ -3,9 +3,13 @@ package main
 import "fmt"
 
 func firstMissingPositive(nums []int) int {
-	for i, num:=range nums {
-		if num>0 && num<=len(nums) && num!=i+1{
+	i:=0
+	for i<len(nums) {
+		num:=nums[i]
+		if num>0 && num<=len(nums) && num!=i+1 && nums[num-1]!=num{
 			nums[num-1], nums[i]=nums[i],nums[num-1]
+		} else {
+			i++
 		}
 	}
 
