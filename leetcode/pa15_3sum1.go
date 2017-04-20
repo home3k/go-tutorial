@@ -1,6 +1,19 @@
 package main
 
-import "fmt"
+func threeSum(nums []int) [][]int {
+	result := [][]int{}
+	contains:=make(map[string]int)
+	if len(nums) < 3 {
+		return result
+	}
+	for i, num:= range nums  {
+		if i+3== len(nums) {
+			break
+		}
+		two:=twoSum(nums[i+1:], -num)
+
+	}
+}
 
 func twoSum(nums []int, target int) []int {
 	var result []int
@@ -14,10 +27,4 @@ func twoSum(nums []int, target int) []int {
 		m[target-num] = index
 	}
 	return result
-}
-
-func main() {
-	// test
-	fmt.Println(twoSum([]int{1, 5, 8}, 6))
-	fmt.Println(twoSum([]int{10, 5, 8, 28, 1, 3, 6}, 9))
 }
