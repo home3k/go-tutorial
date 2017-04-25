@@ -2,7 +2,6 @@ package main
 
 func threeSum(nums []int) [][]int {
 	result := [][]int{}
-	contains:=make(map[string]int)
 	if len(nums) < 3 {
 		return result
 	}
@@ -11,12 +10,15 @@ func threeSum(nums []int) [][]int {
 			break
 		}
 		two:=twoSum(nums[i+1:], -num)
+		for _, t:=range two {
+			result = append(result, t)
+		}
 
 	}
 }
 
-func twoSum(nums []int, target int) []int {
-	var result []int
+func twoSum(nums []int, target int) [][]int {
+	var result [][]int
 	var m = make(map[int]int)
 	for index, num := range nums {
 		// match

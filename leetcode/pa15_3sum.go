@@ -19,28 +19,32 @@ A solution set is:
 */
 func threeSum(nums []int) [][]int {
 	sort(nums, 0, len(nums)-1)
-	left, right := 0, len(nums)-1
 	result := [][]int{}
 	if len(nums) < 3 {
 		return result
 	}
-	for left < right-1 {
-		index := left + 1
-		for index < right {
-			sum := nums[left] + nums[right] + nums[index]
-			if sum == 0 {
-				result = append(result, []int{nums[left], nums[index], nums[right]})
-				index++
-			} else if sum > 0 {
-				break
-			} else {
-				index++
-			}
+	for i:=0; i<len(nums)-2;i++ {
+		if i>0 && nums[i] == nums[i-1] {
+			continue
 		}
-		if nums[left]+nums[right] <0 {
-			left++
-		} else {
-			right--
+		target:= nums[i]
+		left, right := i+1, len(nums)-1
+		for left < right {
+			if nums[left] + nums[right] + target == 0 {
+				result = append(result, []int{nums[i], nums[left], nums[right]})
+				left++
+				right--
+				for left < right && nums[left] == nums[left-1] {
+					left++
+				}
+				for left < right && nums[right] == nums[right+1] {
+					right--
+				}
+			} else if nums[left] + nums[right] + target > 0 {
+				right--
+			} else {
+				left++
+			}
 		}
 	}
 	return result
