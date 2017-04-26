@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // 2 abc 3 def 4 ghi 5 jkl 6 mno 7 pgrs 8 tuv 9 wxyz
 // Input:Digit string "23"
 // abc def
@@ -18,40 +20,44 @@ var mapping = map[rune]string{
 	'4': "ghi",
 	'5': "jkl",
 	'6': "mno",
-	'7': "pgrs",
+	'7': "pqrs",
 	'8': "tuv",
 	'9': "wxyz",
 }
 
-func _combi(s1 string, s2[]string)[]string {
+func letterCombinations(digits string) []string {
+	letters:=[]string{}
+	for _, r := range digits {
+		if v, ok := mapping[r]; ok {
+			letters = append(letters, v)
+		}
+	}
+	if len(letters) == 0 {
+		return []string{}
+	}
+	return _combi(letters)
+}
+
+
+func _combi(s[]string)[]string {
 	result:=[]string{}
-	for _, r := range s1 {
-		for _, s:=range s2 {
-			result = append(result, string(r) + s)
+	if len(s) == 1 {
+		for _, v:=range s[0] {
+			result = append(result, string(v))
+		}
+		return result
+	}
+	next := _combi(s[1:])
+	for _, v:= range s[0] {
+		for _, c:= range next{
+			result = append(result, string(v)+c)
 		}
 	}
 	return result
 }
 
-func letterCombinations(digits string) []string {
-	result := []string{}
-	for _, r := range digits {
 
-	}
-}
-
-
-func combi(s1 string, s2 string, result []string) {
-	if len(s1) == 1 && len(s2) == 1 {
-		result = append(result, s1+s2)
-	} else if len(s1) == 1 {
-		result = append(result, s1+string(s2[0]))
-		combi(s1, s2[1:], result)
-	} else if len(s2) == 1 {
-		result = append(result, string(s1[0])+s2)
-		combi(s1[1:], s2, result)
-	} else {
-		result = append(result, string(s1[0])+string(s2[0]))
-		combi(s1[1:], s2[1:], result)
-	}
+func main() {
+	fmt.Println(letterCombinations("23"))
+	fmt.Println(letterCombinations("234"))
 }
