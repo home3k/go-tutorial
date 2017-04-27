@@ -34,7 +34,13 @@ func swapPairs(head *ListNode) *ListNode {
 	pointer:=new(ListNode)
 	pointer.Next = first
 	var result *ListNode
+	if second == nil {
+		return head
+	}
 	for first!=nil && second!=nil  {
+		if result == nil {
+			result = second
+		}
 		pointer.Next = second
 		first.Next = second.Next
 		second.Next = first
@@ -42,9 +48,6 @@ func swapPairs(head *ListNode) *ListNode {
 		first = pointer.Next
 		if first!=nil {
 			second = first.Next
-		}
-		if result == nil {
-			result = second
 		}
 	}
 	return result
