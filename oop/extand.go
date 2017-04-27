@@ -8,6 +8,7 @@ type point struct {
 
 type ColoredPoint struct {
 	point
+	X float64
 	Color color.RGBA
 }
 

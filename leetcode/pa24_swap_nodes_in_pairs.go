@@ -9,6 +9,16 @@ type ListNode struct {
 	Next *ListNode
 }
 
+/*
+
+Given a linked list, swap every two adjacent nodes and return its head.
+
+For example,
+Given 1->2->3->4, you should return the list as 2->1->4->3.
+
+
+ */
+
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -23,7 +33,7 @@ func swapPairs(head *ListNode) *ListNode {
 	first, second:= head, head.Next
 	pointer:=new(ListNode)
 	pointer.Next = first
-	result:=pointer
+	var result *ListNode
 	for first!=nil && second!=nil  {
 		pointer.Next = second
 		first.Next = second.Next
@@ -33,8 +43,11 @@ func swapPairs(head *ListNode) *ListNode {
 		if first!=nil {
 			second = first.Next
 		}
+		if result == nil {
+			result = second
+		}
 	}
-	return (*result).Next
+	return result
 }
 
 
