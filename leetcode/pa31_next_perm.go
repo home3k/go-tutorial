@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 
 Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
@@ -36,7 +38,7 @@ func nextPermutation(nums []int) {
 			nums[i-1], nums[j] = nums[j], nums[i-1]
 			// sort
 			reverse(nums, i, len(nums)-1)
-			nti:= len(nums) -1 - i - j
+			nti:= len(nums) -1 + i - j
 			for nti>i {
 				if nums[nti-1] > nums[nti] {
 					nums[nti-1], nums[nti]=nums[nti], nums[nti-1]
@@ -56,7 +58,65 @@ func reverse(nums []int, start int, end int) {
 	if start >= end {
 		return
 	}
-	for start >= end {
+	for start < end {
 		nums[start], nums[end] = nums[end], nums[start]
+		start++;end--
 	}
+}
+
+func main()  {
+	nums:= []int{1,2,3,4,5}
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nextPermutation(nums)
+	fmt.Println(nums)
+	nums=[]int{5,4,3,2,1}
+	nextPermutation(nums)
+	fmt.Println(nums)
 }
