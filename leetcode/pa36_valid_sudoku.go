@@ -6,9 +6,9 @@ func isValidSudoku(board [][]byte) bool {
 	}
 	row := make([]map[byte]bool, 9)
 	col := make([]map[byte]bool, 9)
-	sqare := make([]map[byte]bool, 9)
+	square := make([]map[byte]bool, 9)
 	for i, b := range board {
-		for j, _ := range b {
+		for j := range b {
 			x := board[i][j]
 			if x == '.' {
 				continue
@@ -26,10 +26,10 @@ func isValidSudoku(board [][]byte) bool {
 				}
 
 				k := (i / 3)  + 3 * (j/3)
-				s := sqare[k]
+				s := square[k]
 				if s == nil {
 					s = make(map[byte]bool)
-					sqare[k]=s
+					square[k]=s
 				}
 				if _, ok := row[i][x]; ok {
 					return false
@@ -41,10 +41,10 @@ func isValidSudoku(board [][]byte) bool {
 				} else {
 					col[j][x] = true
 				}
-				if _, ok := sqare[k][x]; ok {
+				if _, ok := square[k][x]; ok {
 					return false
 				} else {
-					sqare[k][x] = true
+					square[k][x] = true
 				}
 			}
 		}
