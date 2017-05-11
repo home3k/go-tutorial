@@ -29,9 +29,6 @@ func combinationSum(candidates []int, target int) [][]int {
 	}
 	start, end := 0, len(candidates)
 	for start < end {
-		if candidates[start] >= target {
-			break
-		}
 
 	}
 }
