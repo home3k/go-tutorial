@@ -23,13 +23,16 @@ A solution set is:
 ]
 */
 func combinationSum(candidates []int, target int) [][]int {
+	return _combinationSum(candidates, target, true)
+}
+
+func _combinationSum(candidates []int, target int, _sort bool )  [][]int  {
+	result:=[][]int{}
 	if len(candidates) == 0 {
-		return [][]int{}
+		return result
 	}
-	result := [][]int{}
-	sort(candidates, 0, len(candidates)-1)
-	if search(candidates, target) {
-		result = append(result, []int{target})
+	if _sort {
+		sort(candidates, 0, len(candidates)-1)
 	}
 	start, end := 0, len(candidates)
 	for start < end {
@@ -37,35 +40,44 @@ func combinationSum(candidates []int, target int) [][]int {
 		if val > target {
 			break
 		}
-		i := 0
-		tVal := val
-		tresult:=[][]int{}
-		for tVal < target {
-			i++
-			if target-tVal < val {
-				break
-			}
+		tVal := target
+		if target % val == 0 {
 			tv := []int{}
-			for x := 0; x < i; x++ {
+			for x := 0; x < target / val; x++ {
 				tv = append(tv, val)
 			}
-			if start+1 < end && target-tVal >= candidates[start+1] {
-				next := combinationSum(candidates[start+1:], target-tVal)
-				for x:=len(next)-1;x>=0;x-- {
-					ns:=next[x]
-					tresult = append([][]int{append(tv, ns...)}, tresult...)
+			result = append(result, tv)
+			tVal = target - 2 * val
+		} else {
+			tVal = target - val
+		}
+		for tVal >= val {
+
+			i:=tVal / val
+			rest:=target - i*val
+			if rest < val {
+				break
+			}
+
+			if start+1 < end && rest >= candidates[start+1] {
+				next := _combinationSum(candidates[start+1:], rest, false)
+				for _, ns:=range next {
+					tv := []int{}
+					for x := 0; x < i; x++ {
+						tv = append(tv, val)
+					}
+					tv=append(tv,ns...)
+					result = append(result, tv)
+					fmt.Println(result)
 				}
 			}
-			if target-tVal == val {
-				tv = append(tv, val)
-				tresult = append([][]int{tv}, tresult...)
-				break
-			}
-			tVal += val
+			tVal -= val
 		}
-		result=append(result, tresult...)
 		start++
 	}
+	//if search(candidates, target) {
+	//	result = append(result, []int{target})
+	//}
 	return result
 }
 
@@ -113,4 +125,5 @@ func main()  {
 	fmt.Println(combinationSum([]int{2, 3, 6, 7}, 7))
 	fmt.Println(combinationSum([]int{7, 3, 6, 2}, 7))
 	fmt.Println(combinationSum([]int{2, 3, 6, 1}, 7))
+	fmt.Println(combinationSum([]int{5, 10, 8, 4, 3, 12, 9}, 27))
 }
