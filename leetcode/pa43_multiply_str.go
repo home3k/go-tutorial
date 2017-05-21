@@ -33,6 +33,7 @@ var tail = map[int]string {
 }
 
 func multiply(num1 string, num2 string) string {
+	cache = make(map[int]string)
 	l1, l2, l, r:=len(num1), len(num2), num1, num2
 	if l1<l2 {
 		l, r = num2, num1
@@ -51,7 +52,7 @@ func getBase(x int) string {
 	if _, ok := tail[x]; ok {
 		return tail[x]
 	} else {
-		tail[x] = tail[x-1] + "0"
+		tail[x] = getBase(x-1) + "0"
 		return tail[x]
 	}
 }
@@ -125,4 +126,5 @@ func main()  {
 	// 23234324234234234234
 	fmt.Println(multiply("34234234234","4523456767768995678657867"))
 	fmt.Println(multiply("9","9"))
+	fmt.Println(multiply("401716832807512840963","167141802233061013023557397451289113296441069"))
 }
