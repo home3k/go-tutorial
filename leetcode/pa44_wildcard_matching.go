@@ -23,10 +23,10 @@ isMatch("aab", "c*a*b") → false
 */
 func isMatch(s string, p string) bool {
 	if len(p) == 0 {
-		return true
+		return len(s)==0
 	}
 	if len(s) == 0 {
-		return p != "*"
+		return p == "*"
 	}
 	ss, sp := 0, 0
 	for ss < len(s) && sp < len(p) {
@@ -104,6 +104,22 @@ func subMatch(s string, sub []string) bool {
 	if ss >= len(s) && sSub >= len(sub) {
 		return true
 	} else {
+		if sSub<len(sub) {
+			return false
+		}
+		es, esub:=len(s)-1, len(sub[len(sub)-1])-1
+		for es>=0 && esub>=0  {
+			t:=sub[len(sub)-1][esub]
+			if  s[es]==t || t=='?' {
+				es--
+				esub--
+			} else {
+				return false
+			}
+		}
+		if esub < 0 {
+			return true
+		}
 		return false
 	}
 }
@@ -120,4 +136,7 @@ func main() {
 	fmt.Println(isMatch("aabb", "a*b*b"))
 	fmt.Println(isMatch("missingtest", "mi*ing?s*t"))
 	fmt.Println(isMatch("bdfasdfadfwefwfadfasd", "*fa??*we*?df*d"))
+	fmt.Println(isMatch("aaaa", "***a"))
+	fmt.Println(isMatch("", "*"))
+	fmt.Println(isMatch("ab", "*a*"))
 }
